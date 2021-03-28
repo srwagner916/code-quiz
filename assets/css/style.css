@@ -38,3 +38,7 @@ button {
   font-size: 18px;
   border-radius: 5px;
 }
+
+button:hover {
+  background:rgb(243, 111, 255);
+}
