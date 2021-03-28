@@ -2,12 +2,15 @@ var timerCount = 0;
 var scoreCount = 0;
 var timeLeftEl = document.querySelector('#time-counter');
 var startBtn = document.querySelector('#start-btn');
-var timeLeft = 75
+var timeLeft = 10;
 var questionEl = document.querySelector('#question-text')
 var answerContainerEl = document.querySelector('#answer-container');
 var questionsArr = [
-  {q: 'Commonly used data types do not include:', a: 'alerts', wrongA1: 'booleans', wrongA2: 'strings', wrongA3: 'numbers' },
-  {q: 'The condition in an if/else statement is enclosed in:', a: 'parentheses', wrongA1: 'curly brackets', wrongA2: 'quotations', wrongA3: 'square brackets'}
+  {q: 'Commonly used data types do not include _______.', a: 'alerts', wrongA1: 'booleans', wrongA2: 'strings', wrongA3: 'numbers' },
+  {q: 'The condition in an if/else statement is enclosed in _______.', a: 'parentheses', wrongA1: 'curly brackets', wrongA2: 'quotations', wrongA3: 'square brackets'},
+  {q: 'Arrays in javascript can be used to store_______.', a: 'all of the above', wrongA1: 'numbers and strings', wrongA2: 'booleans', wrongA3: 'other arrays'},
+  {q: 'String values must be contained within _______ when being assigned to variables.', a: 'quotes', wrongA1: 'commas', wrongA2: 'curly brackets', wrongA3: 'parentheses'},
+  {q: 'A very useful tool used during development and debugging for printing content to the debugger is _______.', a: 'console.log', wrongA1: 'JavaScript', wrongA2: 'terminal/bash', wrongA3: 'for loops'}
 ];
 
 //answer buttons
@@ -33,11 +36,16 @@ var answerFeedbackContainerEl = document.querySelector('#answer-feedback-contain
 // start timer function
 var timeCountDown = function() {
   var timerInterval = setInterval(function() {
-    if (timeLeft >= 0) {
+    if (timeLeft >= 1) {
       timeLeftEl.textContent = 'Time: ' + timeLeft;
       timeLeft--;
     }
+    else if (timeLeft === 0) {
+      timeLeftEl.textContent = 'Time: 0';
+      clearInterval(timerInterval);
+    }
     else {
+      timeLeftEl.textContent = 'Time: 0';
       clearInterval(timerInterval);
     }
     console.log(timeLeft);
@@ -59,7 +67,7 @@ startBtn.addEventListener('click', function() {
   startBtn.remove();
 
   //first question
-  //insert first question text
+  //insert question text
   questionEl.textContent = questionsArr[0].q;
   //insert answer text into buttons  
   answerBtn.textContent = questionsArr[0].a;
@@ -97,7 +105,7 @@ startBtn.addEventListener('click', function() {
 
 
 var question2 = function() {
-  //insert first question text
+  //insert question text
   questionEl.textContent = questionsArr[1].q;
 
   //insert answer text into buttons 
@@ -117,7 +125,7 @@ var question2 = function() {
     answerFeedbackEl.textContent = 'Correct!';
     answerFeedbackContainerEl.appendChild(answerFeedbackEl);
     removeButtons();
-    
+    question3();
   });
 
   //event listener for wrong answer
@@ -127,7 +135,43 @@ var question2 = function() {
     answerFeedbackContainerEl.appendChild(answerFeedbackEl);
     timeLeft = timeLeft - 10;
     removeButtons();
-    
+    question3();
+    })
+  })  
+};
+
+var question3 = function() {
+  //insert question text
+  questionEl.textContent = questionsArr[2].q;
+
+  //insert answer text into buttons 
+  answerBtn.textContent = questionsArr[2].a;
+  wrongABtn1.textContent = questionsArr[2].wrongA1;
+  wrongABtn2.textContent = questionsArr[2].wrongA2;
+  wrongABtn3.textContent = questionsArr[2].wrongA3;
+   
+  //append buttons to page
+  answersLi2.appendChild(answerBtn);
+  answersLi4.appendChild(wrongABtn1);
+  answersLi1.appendChild(wrongABtn2);
+  answersLi3.appendChild(wrongABtn3);
+ 
+  //event listener for correct answer
+  answerBtn.addEventListener('click', function() {
+    answerFeedbackEl.textContent = 'Correct!';
+    answerFeedbackContainerEl.appendChild(answerFeedbackEl);
+    removeButtons();
+
+  });
+ 
+  //event listener for wrong answer
+  document.querySelectorAll('.wrong-a').forEach(item => {
+    item.addEventListener('click', function(){  
+    answerFeedbackEl.textContent = 'Wrong!';
+    answerFeedbackContainerEl.appendChild(answerFeedbackEl);
+    timeLeft = timeLeft - 10;
+    removeButtons();
+     
     })
   })  
 };
