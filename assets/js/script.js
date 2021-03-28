@@ -9,6 +9,7 @@ var questionsArr = [
   {q: 'Commonly used data types do not include:', a: 'alerts', wrongA1: 'booleans', wrongA2: 'strings', wrongA3: 'numbers' },
   {q: 'The condition in an if/else statement is enclosed in:', a: 'parentheses', wrongA1: 'curly brackets', wrongA2: 'quotations', wrongA3: 'square brackets'}
 ];
+
 //answer buttons
 var answersUl = document.createElement('ul');
 var answersLi1 = document.createElement('li');
@@ -22,6 +23,7 @@ var wrongABtn2 = document.createElement('button');
 wrongABtn2.classList.add('wrong-a');
 var wrongABtn3 = document.createElement('button');
 wrongABtn3.classList.add('wrong-a');
+
 //answer feedback
 var answerFeedbackEl = document.createElement('span');
 answerFeedbackEl.classList.add('answer-feedback');
@@ -42,6 +44,13 @@ var timeCountDown = function() {
   }, 1000);
 };
 
+var removeButtons = function(){
+  answerBtn.remove();
+  wrongABtn1.remove();
+  wrongABtn2.remove();
+  wrongABtn3.remove();
+};
+
 //start button event listener
 startBtn.addEventListener('click', function() {
   timeCountDown();
@@ -49,15 +58,15 @@ startBtn.addEventListener('click', function() {
   openingText.remove();
   startBtn.remove();
 
-  
+  //first question
+  //insert first question text
   questionEl.textContent = questionsArr[0].q;
-  
-    
+  //insert answer text into buttons  
   answerBtn.textContent = questionsArr[0].a;
   wrongABtn1.textContent = questionsArr[0].wrongA1;
   wrongABtn2.textContent = questionsArr[0].wrongA2;
   wrongABtn3.textContent = questionsArr[0].wrongA3;
-    
+  //append buttons to page
   answerContainerEl.appendChild(answersUl);
   answersUl.appendChild(answersLi1);
   answersUl.appendChild(answersLi2);
@@ -67,25 +76,58 @@ startBtn.addEventListener('click', function() {
   answersLi2.appendChild(wrongABtn1);
   answersLi3.appendChild(wrongABtn2);
   answersLi4.appendChild(wrongABtn3);
-
     //event listener for correct answer
-    answerBtn.addEventListener('click', function() {
-      answerFeedbackEl.textContent = 'Correct!';
-      answerFeedbackContainerEl.appendChild(answerFeedbackEl);
-    });
+  answerBtn.addEventListener('click', function() {
+    answerFeedbackEl.textContent = 'Correct!';
+    answerFeedbackContainerEl.appendChild(answerFeedbackEl);
+    removeButtons();
+    question2();
+  });
+    //event listener for wrong answer
+  document.querySelectorAll('.wrong-a').forEach(item => {
+    item.addEventListener('click', function(){  
+    answerFeedbackEl.textContent = 'Wrong!';
+    answerFeedbackContainerEl.appendChild(answerFeedbackEl);
+    timeLeft = timeLeft - 10;
+    removeButtons();
+    question2();
+    })
+  })    
+});
 
-    document.querySelectorAll('.wrong-a').forEach(item => {
-      item.addEventListener('click', function(){  
-        answerFeedbackEl.textContent = 'Wrong!';
-        answerFeedbackContainerEl.appendChild(answerFeedbackEl);
-        timeLeft = timeLeft - 10;
-      })
-    })    
 
+var question2 = function() {
+  //insert first question text
+  questionEl.textContent = questionsArr[1].q;
+
+  //insert answer text into buttons 
+  answerBtn.textContent = questionsArr[1].a;
+  wrongABtn1.textContent = questionsArr[1].wrongA1;
+  wrongABtn2.textContent = questionsArr[1].wrongA2;
+  wrongABtn3.textContent = questionsArr[1].wrongA3;
+  
+  //append buttons to page
+  answersLi4.appendChild(answerBtn);
+  answersLi2.appendChild(wrongABtn1);
+  answersLi3.appendChild(wrongABtn2);
+  answersLi1.appendChild(wrongABtn3);
+
+  //event listener for correct answer
+  answerBtn.addEventListener('click', function() {
+    answerFeedbackEl.textContent = 'Correct!';
+    answerFeedbackContainerEl.appendChild(answerFeedbackEl);
+    removeButtons();
+    
   });
 
-
-var nextQuestion = function() {
-  
+  //event listener for wrong answer
+  document.querySelectorAll('.wrong-a').forEach(item => {
+    item.addEventListener('click', function(){  
+    answerFeedbackEl.textContent = 'Wrong!';
+    answerFeedbackContainerEl.appendChild(answerFeedbackEl);
+    timeLeft = timeLeft - 10;
+    removeButtons();
     
-}
+    })
+  })  
+};
