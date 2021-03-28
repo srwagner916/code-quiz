@@ -2,7 +2,7 @@ var timerCount = 0;
 var scoreCount = 0;
 var timeLeftEl = document.querySelector('#time-counter');
 var startBtn = document.querySelector('#start-btn');
-var timeLeft = 10;
+var timeLeft = 75;
 var questionEl = document.querySelector('#question-text')
 var answerContainerEl = document.querySelector('#answer-container');
 var questionsArr = [
@@ -151,8 +151,8 @@ var question3 = function() {
   wrongABtn3.textContent = questionsArr[2].wrongA3;
    
   //append buttons to page
-  answersLi2.appendChild(answerBtn);
-  answersLi4.appendChild(wrongABtn1);
+  answersLi4.appendChild(answerBtn);
+  answersLi2.appendChild(wrongABtn1);
   answersLi1.appendChild(wrongABtn2);
   answersLi3.appendChild(wrongABtn3);
  
@@ -161,9 +161,81 @@ var question3 = function() {
     answerFeedbackEl.textContent = 'Correct!';
     answerFeedbackContainerEl.appendChild(answerFeedbackEl);
     removeButtons();
-
+    question4();
   });
  
+  //event listener for wrong answer
+  document.querySelectorAll('.wrong-a').forEach(item => {
+    item.addEventListener('click', function(){  
+    answerFeedbackEl.textContent = 'Wrong!';
+    answerFeedbackContainerEl.appendChild(answerFeedbackEl);
+    timeLeft = timeLeft - 10;
+    removeButtons();
+    question4();
+    })
+  })  
+};
+
+var question4 = function() {
+  //insert question text
+  questionEl.textContent = questionsArr[3].q;
+
+  //insert answer text into buttons 
+  answerBtn.textContent = questionsArr[3].a;
+  wrongABtn1.textContent = questionsArr[3].wrongA1;
+  wrongABtn2.textContent = questionsArr[3].wrongA2;
+  wrongABtn3.textContent = questionsArr[3].wrongA3;
+     
+  //append buttons to page
+  answersLi3.appendChild(answerBtn);
+  answersLi4.appendChild(wrongABtn1);
+  answersLi2.appendChild(wrongABtn2);
+  answersLi1.appendChild(wrongABtn3);
+   
+  //event listener for correct answer
+  answerBtn.addEventListener('click', function() {
+    answerFeedbackEl.textContent = 'Correct!';
+    answerFeedbackContainerEl.appendChild(answerFeedbackEl);
+    removeButtons();
+    question5();
+  });
+   
+  //event listener for wrong answer
+  document.querySelectorAll('.wrong-a').forEach(item => {
+    item.addEventListener('click', function(){  
+    answerFeedbackEl.textContent = 'Wrong!';
+    answerFeedbackContainerEl.appendChild(answerFeedbackEl);
+    timeLeft = timeLeft - 10;
+    removeButtons();
+    question5();
+    })
+  })  
+};
+
+var question5 = function() {
+  //insert question text
+  questionEl.textContent = questionsArr[4].q;
+
+  //insert answer text into buttons 
+  answerBtn.textContent = questionsArr[4].a;
+  wrongABtn1.textContent = questionsArr[4].wrongA1;
+  wrongABtn2.textContent = questionsArr[4].wrongA2;
+  wrongABtn3.textContent = questionsArr[4].wrongA3;
+     
+  //append buttons to page
+  answersLi3.appendChild(answerBtn);
+  answersLi2.appendChild(wrongABtn1);
+  answersLi4.appendChild(wrongABtn2);
+  answersLi1.appendChild(wrongABtn3);
+   
+  //event listener for correct answer
+  answerBtn.addEventListener('click', function() {
+    answerFeedbackEl.textContent = 'Correct!';
+    answerFeedbackContainerEl.appendChild(answerFeedbackEl);
+    removeButtons();
+
+  });
+   
   //event listener for wrong answer
   document.querySelectorAll('.wrong-a').forEach(item => {
     item.addEventListener('click', function(){  
