@@ -42,3 +42,11 @@ button {
 button:hover {
   background:rgb(243, 111, 255);
 }
+
+.container ul {
+  list-style-type:none;
+}
+
+.container ul li {
+  margin: 10px 0;
+}
