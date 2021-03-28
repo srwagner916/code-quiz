@@ -1,0 +1,40 @@
+body {
+  font-family: Arial, sans-serif;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.high-scores {
+  color: rgb(104, 0, 104);
+  font-size: 20px;
+}
+
+.time-counter {
+  font-size: 18px;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  margin: auto 650px;
+}
+
+.container h2 {
+  font-size: 44px;
+}
+
+.container p {
+  font-size: 18px;
+  font-weight:600;
+}
+
+button {
+  background:rgb(104, 0, 104);
+  color: white;
+  font-size: 18px;
+  border-radius: 5px;
+}
