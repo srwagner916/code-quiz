@@ -17,8 +17,6 @@ body {
 }
 
 .container {
-  display: flex;
-  justify-content: center;
   text-align: center;
   margin: auto 650px;
 }
@@ -28,7 +26,7 @@ body {
 }
 
 .container p {
-  font-size: 18px;
+  font-size: 24px;
   font-weight:600;
 }
 
@@ -49,4 +47,25 @@ button:hover {
 
 .container ul li {
   margin: 10px 0;
+}
+
+.submit-container span {
+  font-size: 24px;
+}
+
+.submit-container input {
+  border: 2px solid;
+  height: 34px;
+  margin: 15px;
+  width: 220px;
+  font-size: 20px;
+}
+
+.submit-container #submit-btn {
+  width: 100px;
+  height: 34px;
+  background:rgb(104, 0, 104);
+  color: white;
+  font-size: 20px;
+  border-radius: 5px;
 }

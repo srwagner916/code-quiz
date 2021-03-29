@@ -3,7 +3,8 @@ var scoreCount = 0;
 var timeLeftEl = document.querySelector('#time-counter');
 var startBtn = document.querySelector('#start-btn');
 var timeLeft = 75;
-var questionEl = document.querySelector('#question-text')
+var questionEl = document.querySelector('#question-text');
+var openingTextEl = document.querySelector('#opening-text');
 var answerContainerEl = document.querySelector('#answer-container');
 var questionsArr = [
   {q: 'Commonly used data types do not include _______.', a: 'alerts', wrongA1: 'booleans', wrongA2: 'strings', wrongA3: 'numbers' },
@@ -51,7 +52,7 @@ var timeCountDown = function() {
     console.log(timeLeft);
   }, 1000);
 };
-
+//remove buttons function
 var removeButtons = function(){
   answerBtn.remove();
   wrongABtn1.remove();
@@ -66,32 +67,41 @@ startBtn.addEventListener('click', function() {
   openingText.remove();
   startBtn.remove();
 
-  //first question
-  //insert question text
-  questionEl.textContent = questionsArr[0].q;
-  //insert answer text into buttons  
-  answerBtn.textContent = questionsArr[0].a;
-  wrongABtn1.textContent = questionsArr[0].wrongA1;
-  wrongABtn2.textContent = questionsArr[0].wrongA2;
-  wrongABtn3.textContent = questionsArr[0].wrongA3;
   //append buttons to page
   answerContainerEl.appendChild(answersUl);
   answersUl.appendChild(answersLi1);
   answersUl.appendChild(answersLi2);
   answersUl.appendChild(answersLi3);
   answersUl.appendChild(answersLi4);
+
+  question1();
+});
+
+var question1 = function() {
+  //insert question text
+  questionEl.textContent = questionsArr[0].q;
+
+  //insert answer text into buttons 
+  answerBtn.textContent = questionsArr[0].a;
+  wrongABtn1.textContent = questionsArr[0].wrongA1;
+  wrongABtn2.textContent = questionsArr[0].wrongA2;
+  wrongABtn3.textContent = questionsArr[0].wrongA3;
+  
+  //append buttons to page
   answersLi1.appendChild(answerBtn);
   answersLi2.appendChild(wrongABtn1);
   answersLi3.appendChild(wrongABtn2);
   answersLi4.appendChild(wrongABtn3);
-    //event listener for correct answer
+
+  //event listener for correct answer
   answerBtn.addEventListener('click', function() {
     answerFeedbackEl.textContent = 'Correct!';
     answerFeedbackContainerEl.appendChild(answerFeedbackEl);
     removeButtons();
     question2();
   });
-    //event listener for wrong answer
+
+  //event listener for wrong answer
   document.querySelectorAll('.wrong-a').forEach(item => {
     item.addEventListener('click', function(){  
     answerFeedbackEl.textContent = 'Wrong!';
@@ -100,8 +110,8 @@ startBtn.addEventListener('click', function() {
     removeButtons();
     question2();
     })
-  })    
-});
+  })  
+};
 
 
 var question2 = function() {
@@ -133,7 +143,7 @@ var question2 = function() {
     item.addEventListener('click', function(){  
     answerFeedbackEl.textContent = 'Wrong!';
     answerFeedbackContainerEl.appendChild(answerFeedbackEl);
-    timeLeft = timeLeft - 10;
+    timeLeft - 10;
     removeButtons();
     question3();
     })
@@ -169,7 +179,7 @@ var question3 = function() {
     item.addEventListener('click', function(){  
     answerFeedbackEl.textContent = 'Wrong!';
     answerFeedbackContainerEl.appendChild(answerFeedbackEl);
-    timeLeft = timeLeft - 10;
+    timeLeft - 10;
     removeButtons();
     question4();
     })
@@ -205,11 +215,13 @@ var question4 = function() {
     item.addEventListener('click', function(){  
     answerFeedbackEl.textContent = 'Wrong!';
     answerFeedbackContainerEl.appendChild(answerFeedbackEl);
-    timeLeft = timeLeft - 10;
+    timeLeft - 10;
     removeButtons();
     question5();
     })
-  })  
+  })
+  scoreCount = timeLeft;
+  console.log('score is ', scoreCount);
 };
 
 var question5 = function() {
@@ -233,7 +245,7 @@ var question5 = function() {
     answerFeedbackEl.textContent = 'Correct!';
     answerFeedbackContainerEl.appendChild(answerFeedbackEl);
     removeButtons();
-
+    yourScorePage();
   });
    
   //event listener for wrong answer
@@ -241,9 +253,52 @@ var question5 = function() {
     item.addEventListener('click', function(){  
     answerFeedbackEl.textContent = 'Wrong!';
     answerFeedbackContainerEl.appendChild(answerFeedbackEl);
-    timeLeft = timeLeft - 10;
+    timeLeft - 10;
     removeButtons();
-     
+    yourScorePage();
     })
-  })  
+  })
 };
+
+var yourScorePage = function() {
+  questionEl.textContent = 'All Done';
+  openingTextEl.textContent = 'Your final score is ' + scoreCount;
+  answerContainerEl.appendChild(openingTextEl);
+  var submitContainerEl = document.createElement('div');
+  submitContainerEl.classList.add('submit-container')
+  answerContainerEl.appendChild(submitContainerEl);
+  var scoreSubmitEl = document.createElement('span');
+  scoreSubmitEl.textContent = 'Enter Initials:';
+  submitContainerEl.appendChild(scoreSubmitEl);
+  var submitInputEl = document.createElement('input');
+  submitInputEl.setAttribute('id', 'name-input');
+  submitContainerEl.appendChild(submitInputEl);
+  var submitButtonEl = document.createElement('button');
+  submitButtonEl.setAttribute('id', 'submit-btn')
+  submitContainerEl.appendChild(submitButtonEl);
+
+  submitButtonEl.addEventListener('click', function(){
+    
+    var highScore = scoreCount;
+    var initials = document.getElementById('name-input').value;
+    localStorage.setItem('highscore', highScore);
+    localStorage.setItem('name', initials);
+  })
+};
+
+
+
+
+
+
+
+var wrongAnswerBtnHandler = function() {
+  document.querySelectorAll('.wrong-a').forEach(item => {
+    item.addEventListener('click', function(){  
+    answerFeedbackEl.textContent = 'Wrong!';
+    answerFeedbackContainerEl.appendChild(answerFeedbackEl);
+    timeLeft - 10;
+    removeButtons();
+    })
+  })
+}
