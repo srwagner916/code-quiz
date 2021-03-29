@@ -8,12 +8,18 @@ body {
 }
 
 .high-scores {
-  color: rgb(104, 0, 104);
+  color: rgb(243, 111, 255);
   font-size: 20px;
+  margin: 20px 0 0 20px;
+}
+
+.high-scores:hover {
+  color: indigo;
 }
 
 .time-counter {
-  font-size: 18px;
+  font-size: 20px;
+  margin: 20px 20px 0 0;
 }
 
 .container {
@@ -31,7 +37,7 @@ body {
 }
 
 button {
-  background:rgb(104, 0, 104);
+  background:indigo;
   color: white;
   font-size: 18px;
   border-radius: 5px;
@@ -50,6 +56,15 @@ button:hover {
   margin: 10px 0;
 }
 
+.answer-feedback {
+  font-size: 26px;
+  border-top: solid 2px gray;
+  color: gray;
+  display:block;
+  text-align: left;
+}
+
+/* submit score form style */
 .submit-container span {
   font-size: 24px;
 }
@@ -65,12 +80,14 @@ button:hover {
 .submit-container #submit-btn {
   width: 100px;
   height: 34px;
-  background:rgb(104, 0, 104);
+  background:indigo;
   color: white;
   font-size: 20px;
   border-radius: 5px;
 }
+/* submit score form style end */
 
+/* high scores style */
 #answer-container #highscore-li {
   color:black;
 }

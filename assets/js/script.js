@@ -1,4 +1,4 @@
-var timerCount = 0;
+var viewHighScoresEl = document.querySelector('#view-high-scores');
 var scoreCount = 0;
 var timeLeftEl = document.querySelector('#time-counter');
 var startBtn = document.querySelector('#start-btn');
@@ -33,6 +33,11 @@ var answerFeedbackEl = document.createElement('span');
 answerFeedbackEl.classList.add('answer-feedback');
 var answerFeedbackContainerEl = document.querySelector('#answer-feedback-container');
 
+//view high scores event listener
+viewHighScoresEl.addEventListener('click', function() {
+  startBtn.remove();
+  displayHighScores();
+});
 
 // start timer function
 var timeCountDown = function() {
@@ -44,6 +49,7 @@ var timeCountDown = function() {
     else if (timeLeft === 0) {
       timeLeftEl.textContent = 'Time: 0';
       clearInterval(timerInterval);
+      window.location.reload();
     }
     else {
       timeLeftEl.textContent = 'Time: 0';
@@ -276,6 +282,7 @@ var yourScorePage = function() {
   submitInputEl.setAttribute('id', 'name-input');
   submitContainerEl.appendChild(submitInputEl);
   var submitButtonEl = document.createElement('button');
+  submitButtonEl.textContent = 'Submit!';
   submitButtonEl.setAttribute('id', 'submit-btn')
   submitContainerEl.appendChild(submitButtonEl);
   //submit score event
@@ -318,18 +325,3 @@ var displayHighScores = function() {
     highScoreBoardEl.remove();
   })
 };
-
-
-
-
-
-var wrongAnswerBtnHandler = function() {
-  document.querySelectorAll('.wrong-a').forEach(item => {
-    item.addEventListener('click', function(){  
-    answerFeedbackEl.textContent = 'Wrong!';
-    answerFeedbackContainerEl.appendChild(answerFeedbackEl);
-    timeLeft - 10;
-    removeButtons();
-    })
-  })
-}
