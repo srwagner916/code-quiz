@@ -254,12 +254,14 @@ var question5 = function() {
     answerFeedbackEl.textContent = 'Wrong!';
     answerFeedbackContainerEl.appendChild(answerFeedbackEl);
     timeLeft - 10;
+    answerFeedbackContainerEl.textContent = '';
     removeButtons();
     yourScorePage();
+
     })
   })
 };
-
+//submit your score function
 var yourScorePage = function() {
   questionEl.textContent = 'All Done';
   openingTextEl.textContent = 'Your final score is ' + scoreCount;
@@ -276,17 +278,46 @@ var yourScorePage = function() {
   var submitButtonEl = document.createElement('button');
   submitButtonEl.setAttribute('id', 'submit-btn')
   submitContainerEl.appendChild(submitButtonEl);
-
+  //submit score event
   submitButtonEl.addEventListener('click', function(){
-    
     var highScore = scoreCount;
     var initials = document.getElementById('name-input').value;
     localStorage.setItem('highscore', highScore);
     localStorage.setItem('name', initials);
+    openingTextEl.remove();
+    submitContainerEl.remove();
+    displayHighScores();
   })
 };
 
+//display highscores
+var displayHighScores = function() {
+  questionEl.textContent = 'High Scores';
+  var goBackBtnEl = document.createElement('button');
+  var clearHighScoreBtnEl = document.createElement('button');
+  goBackBtnEl.textContent = 'Go Back';
+  clearHighScoreBtnEl.textContent = 'Clear High Scores';
+  answerFeedbackContainerEl.appendChild(goBackBtnEl);
+  answerFeedbackContainerEl.appendChild(clearHighScoreBtnEl);
+  var highScoreBoardEl = document.createElement('ol');
+  var highScoreLi = document.createElement('li');
+  
+  var name = localStorage.getItem('name');
+  var highScore = localStorage.getItem('highscore');
+  highScoreLi.textContent = name + '-' + highScore;
 
+  answerContainerEl.appendChild(highScoreBoardEl);
+  highScoreBoardEl.appendChild(highScoreLi);
+  // refresh page on button click
+  goBackBtnEl.addEventListener('click', function() {
+    window.location.reload();
+  })
+  //clear scores on button click
+  clearHighScoreBtnEl.addEventListener('click', function() {
+    localStorage.clear();
+    highScoreBoardEl.remove();
+  })
+};
 
 
 

@@ -35,6 +35,7 @@ button {
   color: white;
   font-size: 18px;
   border-radius: 5px;
+  width: 150px;
 }
 
 button:hover {
@@ -68,4 +69,18 @@ button:hover {
   color: white;
   font-size: 20px;
   border-radius: 5px;
+}
+
+#answer-container #highscore-li {
+  color:black;
+}
+
+#answer-container ol {
+  background:rgb(209, 177, 209);
+  font-size: 20px;
+}
+
+#answer-feedback-container button {
+  width:max-content;
+  margin: 0 15px;
 }
