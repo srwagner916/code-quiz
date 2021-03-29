@@ -17,7 +17,7 @@ body {
   color: indigo;
 }
 
-.time-counter {
+#time-counter {
   font-size: 20px;
   margin: 20px 20px 0 0;
 }

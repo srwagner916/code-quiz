@@ -254,7 +254,7 @@ var question5 = function() {
     answerFeedbackEl.textContent = 'Wrong!';
     answerFeedbackContainerEl.appendChild(answerFeedbackEl);
     timeLeft - 10;
-    answerFeedbackContainerEl.textContent = '';
+    answerFeedbackEl.remove();
     removeButtons();
     yourScorePage();
 
