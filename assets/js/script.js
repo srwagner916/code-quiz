@@ -1,3 +1,4 @@
+//global variables
 var viewHighScoresEl = document.querySelector('#view-high-scores');
 var scoreCount = 0;
 var timeLeftEl = document.querySelector('#time-counter');
@@ -46,6 +47,7 @@ var timeCountDown = function() {
       timeLeftEl.textContent = 'Time: ' + timeLeft;
       timeLeft--;
     }
+    //refresh page, gameover when timer reaches 0
     else if (timeLeft === 0) {
       timeLeftEl.textContent = 'Time: 0';
       clearInterval(timerInterval);
@@ -83,6 +85,7 @@ startBtn.addEventListener('click', function() {
   question1();
 });
 
+// question #1 function expression
 var question1 = function() {
   //insert question text
   questionEl.textContent = questionsArr[0].q;
@@ -119,7 +122,7 @@ var question1 = function() {
   })  
 };
 
-
+// question #2 function expression
 var question2 = function() {
   //insert question text
   questionEl.textContent = questionsArr[1].q;
@@ -156,22 +159,20 @@ var question2 = function() {
   })  
 };
 
+// question #3 function expression
 var question3 = function() {
   //insert question text
   questionEl.textContent = questionsArr[2].q;
-
   //insert answer text into buttons 
   answerBtn.textContent = questionsArr[2].a;
   wrongABtn1.textContent = questionsArr[2].wrongA1;
   wrongABtn2.textContent = questionsArr[2].wrongA2;
   wrongABtn3.textContent = questionsArr[2].wrongA3;
-   
   //append buttons to page
   answersLi4.appendChild(answerBtn);
   answersLi2.appendChild(wrongABtn1);
   answersLi1.appendChild(wrongABtn2);
   answersLi3.appendChild(wrongABtn3);
- 
   //event listener for correct answer
   answerBtn.addEventListener('click', function() {
     answerFeedbackEl.textContent = 'Correct!';
@@ -179,7 +180,6 @@ var question3 = function() {
     removeButtons();
     question4();
   });
- 
   //event listener for wrong answer
   document.querySelectorAll('.wrong-a').forEach(item => {
     item.addEventListener('click', function(){  
@@ -192,22 +192,20 @@ var question3 = function() {
   })  
 };
 
+// question #4 function expression
 var question4 = function() {
   //insert question text
   questionEl.textContent = questionsArr[3].q;
-
   //insert answer text into buttons 
   answerBtn.textContent = questionsArr[3].a;
   wrongABtn1.textContent = questionsArr[3].wrongA1;
   wrongABtn2.textContent = questionsArr[3].wrongA2;
   wrongABtn3.textContent = questionsArr[3].wrongA3;
-     
   //append buttons to page
   answersLi3.appendChild(answerBtn);
   answersLi4.appendChild(wrongABtn1);
   answersLi2.appendChild(wrongABtn2);
   answersLi1.appendChild(wrongABtn3);
-   
   //event listener for correct answer
   answerBtn.addEventListener('click', function() {
     answerFeedbackEl.textContent = 'Correct!';
@@ -215,7 +213,6 @@ var question4 = function() {
     removeButtons();
     question5();
   });
-   
   //event listener for wrong answer
   document.querySelectorAll('.wrong-a').forEach(item => {
     item.addEventListener('click', function(){  
@@ -230,22 +227,20 @@ var question4 = function() {
   console.log('score is ', scoreCount);
 };
 
+// question #5 function expression
 var question5 = function() {
   //insert question text
   questionEl.textContent = questionsArr[4].q;
-
   //insert answer text into buttons 
   answerBtn.textContent = questionsArr[4].a;
   wrongABtn1.textContent = questionsArr[4].wrongA1;
   wrongABtn2.textContent = questionsArr[4].wrongA2;
   wrongABtn3.textContent = questionsArr[4].wrongA3;
-     
   //append buttons to page
   answersLi3.appendChild(answerBtn);
   answersLi2.appendChild(wrongABtn1);
   answersLi4.appendChild(wrongABtn2);
   answersLi1.appendChild(wrongABtn3);
-   
   //event listener for correct answer
   answerBtn.addEventListener('click', function() {
     answerFeedbackEl.textContent = 'Correct!';
@@ -253,7 +248,6 @@ var question5 = function() {
     removeButtons();
     yourScorePage();
   });
-   
   //event listener for wrong answer
   document.querySelectorAll('.wrong-a').forEach(item => {
     item.addEventListener('click', function(){  
@@ -267,10 +261,12 @@ var question5 = function() {
     })
   })
 };
-//submit your score function
+
+//submit your score function expression
 var yourScorePage = function() {
   questionEl.textContent = 'All Done';
   openingTextEl.textContent = 'Your final score is ' + scoreCount;
+  // create elements for the submit score form
   answerContainerEl.appendChild(openingTextEl);
   var submitContainerEl = document.createElement('div');
   submitContainerEl.classList.add('submit-container')
@@ -285,7 +281,7 @@ var yourScorePage = function() {
   submitButtonEl.textContent = 'Submit!';
   submitButtonEl.setAttribute('id', 'submit-btn')
   submitContainerEl.appendChild(submitButtonEl);
-  //submit score event
+  //submit score event & save to localStorage
   submitButtonEl.addEventListener('click', function(){
     var highScore = scoreCount;
     var initials = document.getElementById('name-input').value;
@@ -297,8 +293,9 @@ var yourScorePage = function() {
   })
 };
 
-//display highscores
+//display highscores function expression
 var displayHighScores = function() {
+  //create elements to display the highscore
   questionEl.textContent = 'High Scores';
   var goBackBtnEl = document.createElement('button');
   var clearHighScoreBtnEl = document.createElement('button');
@@ -308,11 +305,11 @@ var displayHighScores = function() {
   answerFeedbackContainerEl.appendChild(clearHighScoreBtnEl);
   var highScoreBoardEl = document.createElement('ol');
   var highScoreLi = document.createElement('li');
-  
+  // get scores from localStorage
   var name = localStorage.getItem('name');
   var highScore = localStorage.getItem('highscore');
   highScoreLi.textContent = name + '-' + highScore;
-
+  // append scores to the page
   answerContainerEl.appendChild(highScoreBoardEl);
   highScoreBoardEl.appendChild(highScoreLi);
   // refresh page on button click
